@@ -1,6 +1,7 @@
 # Age-Gender-Estimation
+***Possible tools to use to visualize the comparative analysis: Streamlit dashboard or Plotly Dashboard***
 
-<p> The "Age-Gender-Estimation" Django App is a robust and sophisticated Django web application designed to leverage on the power of machine learning to distinctively classify genders and ages of humans facial features. This app leverages the power of KNN and RF techniques to compare the analysis of these models in all of its metrics .</p>
+<p> The "Age-Gender-Estimation" Django App is a robust and sophisticated application designed to leverage on the power of machine learning to distinctively classify genders and ages of humans facial features. This app leverages the power of KNN and RF techniques to compare the analysis of these models in all of its metrics .</p>
 
 <h4> Key Features </h4>
 <ul>
