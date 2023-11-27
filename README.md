@@ -88,7 +88,7 @@ Start the web server
 
 ## Screenshots
 
-![Image Alt KNN Gender Visualization](./img/knn-gender.jpg)
+![Image Alt KNN Gender Visualization](https://drive.google.com/file/d/1GUw5lH9GPm2-XRcsCBZ39BOhvEKiW0Tm/view?usp=drive_link)
 
 
 ## Demo
