@@ -37,7 +37,7 @@ class FaceDataset(object):
             gender = int(gender)
             age = int(age)
             img_path = filename
-            data.append({'image_path': img_path, 'age': age, 'gender': gender})
+            data.append({'IMAGES': img_path, 'AGE': age, 'GENDER': gender})
         return data
 
     def _create_dataframe(self):
@@ -45,8 +45,11 @@ class FaceDataset(object):
         age_grouping = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130]
         age_labels = [f"{i}-{i+4}" for i in range(0, 130, 5)]
 
-        df['age_group'] = pd.cut(df['age'], bins=age_grouping, labels=age_labels, right=False)
-        df = df.astype({'age': 'float32', 'gender': 'int32'})
+        df['age_group'] = pd.cut(df['AGE'], bins=age_grouping, labels=age_labels, right=False)
+        df.rename(columns={'age': 'AGE', 'gender': 'GENDER',
+                           'age_group': 'AGE GROUP', 'image_path': 'IMAGES'}, inplace=True)
+
+        df = df.astype({'AGE': 'float32', 'GENDER': 'int32'})
         return df
 
 #     def visualize__an__image(self):
@@ -55,25 +58,25 @@ class FaceDataset(object):
 #         plt.imshow(img)
 
     def visualize_age_distribution(self):
-        sns.displot(self.df["age"], kde=True, bins=20)
+        sns.displot(self.df["AGE"], kde=True, bins=20)
         plt.title("Age Distribution")
         plt.show()
 
     def visualize_age_group_distribution(self):
-        sns.countplot(x='age_group', data=self.df, order=sorted(self.df['age_group'].unique()))
+        sns.countplot(x='AGE GROUP', data=self.df, order=sorted(self.df['AGE GROUP'].unique()))
         plt.title("Age Group Distribution")
         plt.show()
 
     def plot_image_grid(self, row_no, cols_no):
-        images = self.df['image_path'].values[:row_no * cols_no]
-        labels = self.df[['age_group', 'gender']].head(row_no * cols_no)
+        images = self.df['IMAGES'].values[:row_no * cols_no]
+        labels = self.df[['AGE GROUP', 'GENDER']].head(row_no * cols_no)
         fig, axes = plt.subplots(row_no, cols_no, figsize=(20, 20))
         for i, ax in enumerate(axes.flat):
             i_path = os.path.join(self.dataset_path, images[i])
             img = Image.open(i_path)
             ax.imshow(img)
             ax.axis('off')
-            ax.set_title(f"Age Group: {labels['age_group'][i]}, Gender: {'Male' if labels['gender'][i] == 0 else 'Female'}")
+            ax.set_title(f"Age Group: {labels['AGE GROUP'][i]}, GENDER: {'Male' if labels['GENDER'][i] == 0 else 'Female'}")
         plt.show()
 
     def split_data(self, test_size=0.2, random_state=42):
@@ -117,70 +120,72 @@ class ModelEvaluator:
         print("Confusion Matrix:\n", confusion_matrix(self.y_test, y_prediction))
 
 
-def main():
-    dataset = FaceDataset(Path('dataset/UTKFace/'))
+# def main_script():
+#     dataset = FaceDataset(Path('dataset/UTKFace/'))
+#
+#     # Visualize age distribution
+#     dataset.visualize_age_distribution()
+#
+#     # Visualize age group distribution
+#     dataset.visualize_age_group_distribution()
+#
+#     # Plot image grid
+#     dataset.plot_image_grid(row_no=5, cols_no=5)
+#
+#     # Split data
+#     train, test = dataset.split_data()
+#
+#     # Gender recognition data
+#     X_train_images_gender = images_to_arrays(['dataset/UTKFace/' + filename for filename in train.IMAGES])
+#     X_test_images_gender = images_to_arrays(['dataset/UTKFace/' + filename for filename in test.IMAGES])
+#
+#     # Age estimation data
+#     X_train_images_age = images_to_arrays(['dataset/UTKFace/' + filename for filename in train.IMAGES])
+#     X_test_images_age = images_to_arrays(['dataset/UTKFace/' + filename for filename in test.IMAGES])
+#
+#     # Feature scaling for gender recognition
+#     X_train_scaled_gender = StandardScaler().fit_transform(X_train_images_gender)
+#     # X_test_scaled_gender = StandardScaler().fit(X_train_images_gender).transform(X_test_images_gender)
+#
+#     # Feature scaling for age estimation
+#     X_train_scaled_age = StandardScaler().fit_transform(X_train_images_age)
+#     # X_test_scaled_age = StandardScaler().fit(X_train_images_age).transform(X_test_images_age)
+#
+#     # KNN Model for gender recognition
+#     knn_model_gender = KNeighborsClassifier(n_neighbors=5)
+#     knn_model_gender.fit(X_train_scaled_gender, train['GENDER'])
+#
+#     # KNN Model for age estimation
+#     knn_model_age = KNeighborsClassifier(n_neighbors=5)
+#     knn_model_age.fit(X_train_scaled_age, train['AGE GROUP'])
+#
+#     # Random Forest Model for gender recognition
+#     rf_model_gender = RandomForestClassifier(n_estimators=100, random_state=42)
+#     rf_model_gender.fit(X_train_scaled_gender, train['GENDER'])
+#
+#     # Random Forest Model for age estimation
+#     rf_model_age = RandomForestClassifier(n_estimators=100, random_state=42)
+#     rf_model_age.fit(X_train_scaled_age, train['AGE GROUP'])
+#
+#     # Evaluate KNN Model for gender recognition
+#     knn_evaluator_gender = ModelEvaluator(knn_model_gender, X_test_images_gender, test['GENDER'])
+#     knn_evaluator_gender.evaluate_model()
+#
+#     # Evaluate KNN Model for age estimation
+#     knn_evaluator_age = ModelEvaluator(knn_model_age, X_test_images_age, test['AGE GROUP'])
+#     knn_evaluator_age.evaluate_model()
+#
+#     # Evaluate Random Forest Model for gender recognition
+#     rf_evaluator_gender = ModelEvaluator(rf_model_gender, X_test_images_gender, test['GENDER'])
+#     rf_evaluator_gender.evaluate_model()
+#
+#     # Evaluate Random Forest Model for age estimation
+#     rf_evaluator_age = ModelEvaluator(rf_model_age, X_test_images_age, test['AGE GROUP'])
+#     rf_evaluator_age.evaluate_model()
+#
+#     return dataset, knn_evaluator_gender, knn_evaluator_age, rf_evaluator_gender, rf_evaluator_age
 
-    # Visualize age distribution
-    dataset.visualize_age_distribution()
 
-    # Visualize age group distribution
-    dataset.visualize_age_group_distribution()
-
-    # Plot image grid
-    dataset.plot_image_grid(row_no=5, cols_no=5)
-
-    # Split data
-    train, test = dataset.split_data()
-
-    # Gender recognition data
-    X_train_images_gender = images_to_arrays(['dataset/UTKFace/' + filename for filename in train.image_path])
-    X_test_images_gender = images_to_arrays(['dataset/UTKFace/' + filename for filename in test.image_path])
-
-    # Age estimation data
-    X_train_images_age = images_to_arrays(['dataset/UTKFace/' + filename for filename in train.image_path])
-    X_test_images_age = images_to_arrays(['dataset/UTKFace/' + filename for filename in test.image_path])
-
-    # Feature scaling for gender recognition
-    X_train_scaled_gender = StandardScaler().fit_transform(X_train_images_gender)
-    # X_test_scaled_gender = StandardScaler().fit(X_train_images_gender).transform(X_test_images_gender)
-
-    # Feature scaling for age estimation
-    X_train_scaled_age = StandardScaler().fit_transform(X_train_images_age)
-    # X_test_scaled_age = StandardScaler().fit(X_train_images_age).transform(X_test_images_age)
-
-    # KNN Model for gender recognition
-    knn_model_gender = KNeighborsClassifier(n_neighbors=5)
-    knn_model_gender.fit(X_train_scaled_gender, train['gender'])
-
-    # KNN Model for age estimation
-    knn_model_age = KNeighborsClassifier(n_neighbors=5)
-    knn_model_age.fit(X_train_scaled_age, train['age_group'])
-
-    # Random Forest Model for gender recognition
-    rf_model_gender = RandomForestClassifier(n_estimators=100, random_state=42)
-    rf_model_gender.fit(X_train_scaled_gender, train['gender'])
-
-    # Random Forest Model for age estimation
-    rf_model_age = RandomForestClassifier(n_estimators=100, random_state=42)
-    rf_model_age.fit(X_train_scaled_age, train['age_group'])
-
-    # Evaluate KNN Model for gender recognition
-    knn_evaluator_gender = ModelEvaluator(knn_model_gender, X_test_images_gender, test['gender'])
-    knn_evaluator_gender.evaluate_model()
-
-    # Evaluate KNN Model for age estimation
-    knn_evaluator_age = ModelEvaluator(knn_model_age, X_test_images_age, test['age_group'])
-    knn_evaluator_age.evaluate_model()
-
-    # Evaluate Random Forest Model for gender recognition
-    rf_evaluator_gender = ModelEvaluator(rf_model_gender, X_test_images_gender, test['gender'])
-    rf_evaluator_gender.evaluate_model()
-
-    # Evaluate Random Forest Model for age estimation
-    rf_evaluator_age = ModelEvaluator(rf_model_age, X_test_images_age, test['age_group'])
-    rf_evaluator_age.evaluate_model()
-
-
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
