@@ -1,7 +1,8 @@
 
 # Age-Gender-Estimation: Dash Web Application
 
-
+***Possible tools to use to visualize the comparative analysis: Streamlit dashboard or Plotly Dashboard***
+***Tun this project on Jupyter IDE***
 
 The "Age-Gender-Estimation" Dash App is a robust and sophisticated application designed to leverage on the power of machine learning to distinctively visualize the classifications of genders and age groups of humans facial features. This app leverages the power of KNN and RF techniques to compare the analysis of these models in all of its metrics .
 
