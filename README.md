@@ -88,7 +88,7 @@ Start the web server
 
 ## Screenshots
 
-![https://github.com/cla-bit/Age-Gender-Estimation/blob/dash-dashboard/img/knn-gender.jpg](https://github.com/cla-bit/Age-Gender-Estimation/blob/dash-dashboard/img/knn-gender.jpg)
+![KNN Gender Visualization](img/knn-gender.jpg)
 
 
 ## Demo
