@@ -88,7 +88,7 @@ Start the web server
 
 ## Screenshots
 
-![App Screenshot]([https://via.placeholder.com/468x300?text=App+Screenshot+Here](https://github.com/cla-bit/Age-Gender-Estimation/blob/dash-dashboard/img/knn-gender.jpg)https://github.com/cla-bit/Age-Gender-Estimation/blob/dash-dashboard/img/knn-gender.jpg)
+![App Screenshot](https://github.com/cla-bit/Age-Gender-Estimation/blob/dash-dashboard/img/knn-gender.jpg)
 
 
 
