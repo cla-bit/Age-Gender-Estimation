@@ -1,31 +1,94 @@
-# Age-Gender-Estimation
-***Possible tools to use to visualize the comparative analysis: Streamlit dashboard or Plotly Dashboard***
 
-<p> The "Age-Gender-Estimation" Django App is a robust and sophisticated application designed to leverage on the power of machine learning to distinctively classify genders and ages of humans facial features. This app leverages the power of KNN and RF techniques to compare the analysis of these models in all of its metrics .</p>
+# Age-Gender-Estimation: Dash Web Application
 
-<h4> Key Features </h4>
-<ul>
-	<li>Age Group Classification: Human ages can be grouped into various groups depending on their features.</li>
-	<li>Gender Recognition: The application integrates with various data sources. This data is used to assess the techniques to know how fit it is to classify humans based on gender.</li>
-</ul>
 
-<h3>How to run this app</h3>
-This project is to be run using Docker or in a virtual environment or best on Jupyter IDE. In case Dokcer is not available, the project can be done using the following steps:
 
-<ol>
-	<li>Create and activate a virtual environment and install the requirements:
-		<code>pip install requirements.txt</code>
-	</li>
-	<li>Create a <code>.env </code>file and insert the following or set up a <code>django secret key</code>
-		<ul>
-			<li>SECRET_KEY=default-django-secret-key</li>
-			<li>DEBUG=True</li>
-		</ul>
-	</li>
-	<li>Run the loan_prediction_model.py:
-		<code>python manage.py shell < loan_prediction_model.py</code>
-	</li>
-	<li>Run the django runserver command:
-		<code>python manage.py runserver</code>
-	</li>
-</0l>
+The "Age-Gender-Estimation" Dash App is a robust and sophisticated application designed to leverage on the power of machine learning to distinctively visualize the classifications of genders and age groups of humans facial features. This app leverages the power of KNN and RF techniques to compare the analysis of these models in all of its metrics .
+
+
+
+
+
+
+
+## Features
+
+- Age Group Classification: Human ages can be grouped into various groups depending on their features.
+- Gender Recognition: The application integrates with various data sources. This data is used to assess the techniques to know how fit it is to classify humans based on gender.
+- Dataset visualization table
+- Age Group visualization chart
+- Gender Recognition visualization chart
+
+
+## Documentation
+
+[My Documentation](https://linktodocumentation) # add link to your documentation here
+
+
+## Installation
+
+Install requirements with pip in your terminal
+
+```bash
+  pip install -r requirements.txt
+```
+    
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone -b dash-dashboard https://github.com/cla-bit/Age-Gender-Estimation.git
+```
+# or
+```bash
+    git clone -b dash-dashboard --single-branch https://github.com/cla-bit/Age-Gender-Estimation.git
+```
+
+Go to the project directory
+
+```bash
+  cd dash-dashboard
+```
+
+Create and activate a virtual environment on Windows Terminal
+```bash
+    python -m venv venv
+    venv\Scripts\activate.bat
+```
+
+Create and activate a virtual environment on Unix/Linux Terminal- Ubuntu
+```bash
+    python3 -m venv venv
+    source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt  # Windows Terminal
+  pip3 install -r requirements.txt   # Unix/Linux Terminal- Ubuntu
+```
+
+Start the web server
+
+```bash
+  python dash_web.py  # Windows Terminal
+  python3 dash_web.py  # Unix/Linux Terminal- Ubuntu
+```
+
+
+## Tech Stack
+
+**Libraries:** numpy, matplotlib, pandas, plotly, dash, seaborn, PIL, skikit-learn and tensorflow
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Demo
+
+Insert gif or link to demo
+
