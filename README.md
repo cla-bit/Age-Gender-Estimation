@@ -51,7 +51,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd dash-dashboard
+  cd Age-Gender-Estimation
 ```
 
 Create and activate a virtual environment on Windows Terminal
