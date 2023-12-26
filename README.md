@@ -80,6 +80,22 @@ Start the web server
   python3 dash_web.py  # Unix/Linux Terminal- Ubuntu
 ```
 
+## Run this on Docker
+
+Build the Docker images
+
+```bash
+  docker build -t age_gender_image -f Dockerfile_age_gender .
+  docker build -t dash_web_image -f Dockerfile_dash_web .
+```
+
+Run Docker containers
+
+```bash
+  docker run age_gender_image  # this is for the age_gender_estimation1.py
+  docker run -p 8050:8050 dash_web_image  # this is for the dash_web.py
+```
+
 
 ## Tech Stack
 
