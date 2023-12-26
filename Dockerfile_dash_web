@@ -1,0 +1,21 @@
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
+
+# Upgrade pip and install required packages
+RUN python3 -m pip install pip --upgrade
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY dash_web.py /app/
+COPY requirements.txt /app/
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run dash_web.py when the container launches
+CMD ["python", "dash_web.py"]
